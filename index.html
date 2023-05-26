@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <link rel="icon" href="icon.png">
+
+    <div>
+            <form class="search" id="searchForm" onsubmit="redirectSearch(event)">
+                <input type="text" autocomplete="off" id="searchInput" placeholder=" "/>
+                <button type="submit">Go</button>
+            </form>
+    </div>
+
+    <div class="clockdate">
+        <div id="clock"></div>
+        <div id="date"></div>
+    </div>
+
+    <div>
+        <div class="tooltip_div">
+            <span class="tooltip">A small video to look at ^v^</span>
+                <iframe class="youtube-container" id="stream1" src="https://webcams.windy.com/webcams/stream/1588953463" frameborder="0"></iframe>
+                <iframe class="youtube-container" id="stream2" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen, href="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&"></iframe>
+        </div>
+    </div>
+
+    <button onclick="switchStreams()" id="stream_switch">Switch Streams</button>
+
+
+
+    <div class="tooltip_div">
+        <span class="tooltip">Press this to get a new quote !</span>
+        <button onclick="getNewQuote()" id="quote_button">Get Quote</button>
+    </div>
+
+    <div>
+        <div class="tooltip_div">
+            <span class="tooltip">A small quote to get wiser</span>
+            <div class="quoteOfTheDay">
+                <a id="quote"></a>
+                <p id="author"></p>
+            </div>
+        </div>
+    </div>
+
+    <li class="socials">
+
+        <div id="github" class="circle">
+            <img src="github-mark-white.png" alt="github" width="50" height="50">
+        </div>
+
+    </li>
+    
+</body>
+<script src="main.js"></script>
+<link rel="stylesheet" href="style.css">
+</html>

@@ -88,6 +88,7 @@ button:hover {
   max-width: 50%;
   width: auto;
   border-radius: 10px;
+  color:pink;
 }
 
 .quoteOfTheDay:hover {
@@ -113,45 +114,12 @@ canvas {
   background-color: black;
 }
 
-.clockdate {
-  background-color: lightgray;
-  display: inline-block;
-  border: 1px solid gray;
-  padding: 5px;
-  max-width: 50%;
-  width: auto;
-  border-radius: 10px;
-}
-
-.clockdate:hover {
-  background-color: pink;
-  border: 3px solid hotpink;
-  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
-}
-
 .boid {
   position: absolute;
   width: 10px;
   height: 10px;
   background-image: radial-gradient(lightblue,blue);
   border-radius: 50%;
-}
-
-.search {
-  background-color: pink;
-  display: inline-block;
-  color: hotpink;
-  padding: 5px;
-  max-width: 25%;
-  width: auto;
-  border-radius: 10px;
-}
-
-
-input[type="text"] {
-  outline: none;
-  background-color: rgb(255, 160, 176);
-  color: gray;
 }
 
 .container {
@@ -169,21 +137,126 @@ input[type="text"] {
   scale:50%;
 }
 
+#github:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+#reddit:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+#chatgpt:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+#proton:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  background-color:white;
+  padding: 5px;
+  border-radius: 10px;
+  max-width: fit-content;
+  border-color: pink;
+  border-style: solid;
+}
+
 .circle {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: pink; /* Replace with your desired background color */
-  color: hotpink; /* Replace with your desired text color */
+  background-color: pink;
+  color: hotpink; 
   text-align: center;
-  line-height: 60px; /* Adjust to vertically center the text */
+  line-height: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#github:hover {
-  scale: 1.2;
-  transform: rotate(360deg);
-  transition: scale 0.3s ease-in-out, transform 0.3s ease-in-out;
+.top-right-component {
+  position: fixed;
+  top: 0;
+  right: 0;
+  /* Additional styling properties */
+  /* Add width, height, background color, etc. as needed */
+}
+
+.bottom-right-component {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.bottom-left-component {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.search {
+  background-color: pink;
+  color: hotpink;
+  padding: 5px;
+  max-width: 100%;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 33%;
+  scale:120%;
+  left:600px;
+}
+
+input[type="text"] {
+  outline: none;
+  background-color: rgb(255, 160, 176);
+  color: gray;
+}
+
+.search input[type="text"] {
+  width: 90%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clockdate {
+  background-color: lightgray;
+  display: inline-block;
+  border: 1px solid gray;
+  padding: 5px;
+  max-width: 50%;
+  width: auto;
+  margin-top: 50px;
+  left:max-content;
+  border-radius: 10px;
+  color:white;
+}
+
+.clockdate:hover {
+  background-color: pink;
+  border: 3px solid hotpink;
+  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
 }

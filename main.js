@@ -136,6 +136,12 @@ setInterval(() => {
 const text=document.getElementById("quote");
 const author=document.getElementById("author");
 
+const quoteDiv = document.getElementById('tooltip-div');
+
+  quoteDiv.addEventListener('click', function() {
+    getNewQuote();
+  });
+
 const getNewQuote = async () =>
 {
 
@@ -168,7 +174,7 @@ const getNewQuote = async () =>
 }
 getNewQuote();
 
-setInterval(getNewQuote,10000);
+setInterval(getNewQuote,30000);
 
 function whatIWantLoaded() {
   getNewQuote();

@@ -5,25 +5,27 @@
     <title>Home</title>
 </head>
 <body>
-    <link rel="icon" href="icon.png">
+    <link rel="icon" href="logo.png">
 
-    <div>
+    <div class="centered-container">
             <form class="search" id="searchForm" onsubmit="redirectSearch(event)">
                 <input type="text" autocomplete="off" id="searchInput" placeholder=" "/>
                 <button type="submit">Go</button>
             </form>
     </div>
 
-    <div class="clockdate">
-        <div id="clock"></div>
-        <div id="date"></div>
+
+    <div class="clockdate bottom-right-component">
+        <div id="clock" class="hidden"></div>
+        <div id="date" class="hidden"></div>
     </div>
+
 
     <div>
         <div class="tooltip_div">
             <span class="tooltip">A small video to look at ^v^</span>
                 <iframe class="youtube-container" id="stream1" src="https://webcams.windy.com/webcams/stream/1588953463" frameborder="0"></iframe>
-                <iframe class="youtube-container" id="stream2" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen, href="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&"></iframe>
+                <a href="https://www.youtube.com/live/jfKfPfyJRdk"><iframe class="youtube-container" id="stream2" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen, href="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&"></iframe></a>
         </div>
     </div>
 
@@ -31,26 +33,39 @@
 
 
 
-    <div class="tooltip_div">
-        <span class="tooltip">Press this to get a new quote !</span>
-        <button onclick="getNewQuote()" id="quote_button">Get Quote</button>
-    </div>
+    
 
-    <div>
-        <div class="tooltip_div">
+    <div class="bottom-left-component">
+
+        <div class="tooltip_div" id="tooltip-div">
             <span class="tooltip">A small quote to get wiser</span>
             <div class="quoteOfTheDay">
                 <a id="quote"></a>
                 <p id="author"></p>
             </div>
         </div>
+
     </div>
 
-    <li class="socials">
+    <li class="socials top-right-component">
 
         <div id="github" class="circle">
-            <img src="github-mark-white.png" alt="github" width="50" height="50">
+            <a href="https://github.com/"><img src="github-mark-white.png" alt="github" width="50" height="50"></a>
         </div>
+
+        <div id="reddit" class="circle">
+            <a href="https://www.reddit.com/"><img src="reddit-logo.png" alt="reddit" width="50" height="50"></a>
+        </div>
+
+        <div id="chatgpt" class="circle">
+            <a href="https://chat.openai.com"><img src="chatgpt.png" alt="chatgpt" width="50" height="50"></a>
+        </div>
+
+        <div id="proton" class="circle">
+            <a href="https://account.proton.me/login"><img src="proton.png" alt="protonmail" width="50" height="50"></a>
+        </div>
+
+
 
     </li>
     

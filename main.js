@@ -102,8 +102,14 @@ function redirectSearch(event) {
 
 
 const placeholderTexts = [
-    ' ',
-    '|'
+    'Search... |',
+    'sEarch... /',
+    'seArch... -',
+    'seaRch... \\',
+    'searCh... |',
+    'searcH... /',
+    'search... -',
+    'search... \\',
   ];
   
 let currentIndex = 0;
@@ -114,29 +120,33 @@ setInterval(() => {
     searchInput.placeholder = placeholderTexts[currentIndex];
   }, 500);
   
-  function switchStreams() {
-    var stream1 = document.getElementById('stream1');
-    var stream2 = document.getElementById('stream2');
-    var streambutton = document.getElementById('stream_switch');
-  
-    // Check if stream1 is currently visible
-    if (stream1.style.display !== 'none') {
-      // Hide stream1 and show stream2
-      stream1.style.display = 'none';
-      stream2.style.display = 'block';
-      streambutton.innerHTML = 'Lo-Fi girl';
-    } else {
-      // Hide stream2 and show stream1
-      stream1.style.display = 'block';
-      stream2.style.display = 'none';
-      streambutton.innerHTML = 'Fancy view';
-    }
+
+  var holdTimer;
+
+  function startHoldTimer() {
+    holdTimer = setTimeout(function() {
+      // Your function to be triggered after a certain hold time
+      switchStreams();
+    }, 600); // Adjust the time (in milliseconds) as needed
   }
+  
+  function stopHoldTimer() {
+    clearTimeout(holdTimer);
+  }
+  
+  //var button = document.getElementById("tv-button");
+  
+  //button.addEventListener("mousedown", startHoldTimer);
+  //button.addEventListener("mouseup", stopHoldTimer);
+  //button.addEventListener("mouseleave", stopHoldTimer);
+  
+
+
 
 const text=document.getElementById("quote");
 const author=document.getElementById("author");
 
-const quoteDiv = document.getElementById('tooltip-div');
+const quoteDiv = document.getElementById('quoteOfTheDay');
 
   quoteDiv.addEventListener('click', function() {
     getNewQuote();
@@ -150,7 +160,7 @@ const getNewQuote = async () =>
 
     // fetch the data from api
     const response=await fetch(url);
-    console.log(typeof response);
+    //console.log(typeof response);
     //convert response to json and store it in quotes array
     const allQuotes = await response.json();
 
@@ -176,11 +186,159 @@ getNewQuote();
 
 setInterval(getNewQuote,30000);
 
-function whatIWantLoaded() {
-  getNewQuote();
-  switchStreams();
+
+
+// Physics simulation parameters
+const gravity = 0.5; // Gravity force
+const friction = 0.9; // Friction coefficient
+
+// Click and drag parameters
+let isDragging = false;
+let dragElement = null;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+
+// Get all elements with physics or draggable enabled
+const elements = document.querySelectorAll('.physics, .draggable');
+
+// Create an array to store element data
+const elementData = [];
+
+// Initialize element data
+elements.forEach((element) => {
+  const data = {
+    element,
+    x: 0, // Initial x position
+    y: 0, // Initial y position
+    vx: 0, // Initial x velocity
+    vy: 0, // Initial y velocity
+    tag: element.getAttribute('data-tag'), // Tag for collision handling or draggable
+    isLocked: element.classList.contains('locked'), // Check if element is locked
+    isDraggable: element.classList.contains('draggable'), // Check if element is draggable
+  };
+
+  element.addEventListener('mousedown', handleMouseDown);
+  element.addEventListener('mouseup', handleMouseUp);
+
+  elementData.push(data);
+});
+
+// Function to update element positions
+function updatePositions() {
+  elementData.forEach((data) => {
+    if (!data.isLocked) {
+      // Update velocity based on gravity
+      data.vy += gravity;
+
+      // Update position based on velocity
+      data.x += data.vx;
+      data.y += data.vy;
+
+      // Apply friction
+      data.vx *= friction;
+      data.vy *= friction;
+
+      // Prevent objects from going outside the screen
+      const rect = data.element.getBoundingClientRect();
+      if (data.x < 0) {
+        data.x = 0;
+        data.vx *= -1;
+      } else if (data.x + rect.width > window.innerWidth) {
+        data.x = window.innerWidth - rect.width;
+        data.vx *= -1;
+      }
+      if (data.y < 0) {
+        data.y = 0;
+        data.vy *= -1;
+      } else if (data.y + rect.height > window.innerHeight) {
+        data.y = window.innerHeight - rect.height;
+        data.vy *= -1;
+      }
+    }
+
+    // Update element style
+    data.element.style.transform = `translate(${data.x}px, ${data.y}px)`;
+  });
+}
+
+// Function to handle collisions
+function handleCollisions() {
+  for (let i = 0; i < elementData.length; i++) {
+    const data1 = elementData[i];
+
+    if (!data1.isDraggable) {
+      // Check collision with other elements
+      for (let j = i + 1; j < elementData.length; j++) {
+        const data2 = elementData[j];
+
+        // Check if elements have the same tag for collision handling
+        if (data1.tag === data2.tag) {
+          const rect1 = data1.element.getBoundingClientRect();
+          const rect2 = data2.element.getBoundingClientRect();
+
+          // Detect collision
+          if (
+            rect1.right > rect2.left &&
+            rect1.left < rect2.right &&
+            rect1.bottom > rect2.top &&
+            rect1.top < rect2.bottom
+          ) {
+            // Swap velocities for a simple bounce effect
+            const tempVx = data1.vx;
+            const tempVy = data1.vy;
+            data1.vx = data2.vx;
+            data1.vy = data2.vy;
+            data2.vx = tempVx;
+            data2.vy = tempVy;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Function to handle mouse down event
+function handleMouseDown(event) {
+  const target = event.currentTarget;
+  const data = elementData.find((item) => item.element === target);
+
+  if (data && data.isDraggable) {
+    isDragging = true;
+    dragElement = data;
+    dragOffsetX = event.clientX - data.x;
+    dragOffsetY = event.clientY - data.y;
+  }
+}
+
+// Function to handle mouse up event
+function handleMouseUp() {
+  isDragging = false;
+  dragElement = null;
+}
+
+// Function to handle mouse move event
+function handleMouseMove(event) {
+  if (isDragging && dragElement) {
+    dragElement.x = event.clientX - dragOffsetX;
+    dragElement.y = event.clientY - dragOffsetY;
+    dragElement.element.style.transform = `translate(${dragElement.x}px, ${dragElement.y}px)`;
+  }
+}
+
+// Add mouse move event listener to the document
+document.addEventListener('mousemove', handleMouseMove);
+
+// Animation loop
+function animate() {
+  updatePositions();
+  handleCollisions();
+  requestAnimationFrame(animate);
 }
 
 
+function whatIWantLoaded() {
+  getNewQuote();
+  animate();
+}
 
 window.onload = whatIWantLoaded();

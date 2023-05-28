@@ -1,0 +1,32 @@
+<div class="tv">
+        <div class="content">
+          <img src="tv.png" alt="tv">
+          <div class="gif-container">
+            <img src="static.gif" alt="pretend the screen is off" id="stream1">
+          </div>
+          <div class="iframe-container">
+            <iframe class="youtube-container" id="stream2" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <button class="tv-button" id="tv-button"><img src="tv-knob.png"></button>
+        </div>
+      </div>
+
+
+
+
+
+
+  function switchStreams() {
+    var stream1 = document.getElementById('stream1');
+    var stream2 = document.getElementById('stream2');
+    var button = document.querySelector('.tv-button');
+  
+    if (stream1.style.display !== 'none') {
+      stream1.style.display = 'none';
+      stream2.style.display = 'block';
+    } else {
+      stream1.style.display = 'block';
+      stream2.style.display = 'none';
+    }
+  }
+  

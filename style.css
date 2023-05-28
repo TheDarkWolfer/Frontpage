@@ -32,52 +32,19 @@ body {
   transform: scale(1.2);
 }
 
-button {
+button:not(.tv-button) {
   opacity: 0.5;
   transition: opacity 0.3s, transform 0.3s, background-color 0.3s ease;
   border-radius: 25px; overflow: hidden;
   background-color: lightblue;
 }
 
-button:hover {
+button:hover:not(.tv-button) {
   opacity: 1;
   -webkit-transform: scale(1.2);
   -ms-transform: scale(1.2);
   transform: scale(1.2);
   background-color:hotpink;
-}
-
-.tooltip_div {
-  margin-top: 100px;
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip_div .tooltip {
-  visibility: hidden;
-  width: 170px;
-  background-color: rgb(255, 156, 222);
-  color: #fff;
-  text-align: center;
-  border-radius: 0;
-  padding: 5px 0;
-  
-  /* Positioning the tooltip */
-  position: absolute;
-  z-index: 1;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);  
-  clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%);
-  visibility: hidden;
-  border-radius: 25px;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.tooltip_div:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
 }
 
 .quoteOfTheDay {
@@ -101,27 +68,6 @@ p, a {
   color: white;
 }
 
-#wandering-element {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  background-color: pink;
-  border-radius: 75%;
-  transition: transform 0.3s ease-in-out;
-}
-
-canvas {
-  background-color: black;
-}
-
-.boid {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-image: radial-gradient(lightblue,blue);
-  border-radius: 50%;
-}
-
 .container {
   position: relative;
 }
@@ -131,10 +77,6 @@ canvas {
   top: 0;
   left: 0;
   z-index: 1;
-}
-
-#flag {
-  scale:50%;
 }
 
 #github:hover {
@@ -236,12 +178,6 @@ input[type="text"] {
   width: 90%;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .clockdate {
   background-color: lightgray;
   display: inline-block;
@@ -259,4 +195,62 @@ input[type="text"] {
   background-color: pink;
   border: 3px solid hotpink;
   transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.tv {
+  position: relative;
+  width: 400px; /* Adjust the width as needed */
+  height: auto;
+}
+
+.tv .content {
+  position: relative;
+}
+
+.tv img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tv .gif-container,
+.tv .iframe-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.tv .iframe-container iframe,
+.tv .gif-container img {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.tv .tv-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  scale:10%;
+  pointer-events: auto;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tv-button:active {
+  transform: rotate(360deg);
+  transition: transform 0.6s ease-in-out;
+}
+
+#stream2 {
+  display: none;
+}
+
+#stream1.active {
+  display: block;
 }

@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
   text-shadow: 1px 1px rgba(123, 15, 103, 0.5), 2px 2px rgba(129, 18, 127, 0.51), 3px 3px rgba(112, 20, 135, 0.52);
   
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .youtube-container {
@@ -56,12 +56,14 @@ button:hover:not(.tv-button) {
   width: auto;
   border-radius: 10px;
   color:pink;
+  text-emphasis: bold;
 }
 
 .quoteOfTheDay:hover {
   background-color: pink;
   border: 3px solid hotpink;
   transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+  cursor:pointer;
 }
 
 p, a {
@@ -77,6 +79,32 @@ p, a {
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+#save-notes:hover {
+  scale: 1.2;
+  transform: rotate(180deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+  cursor: pointer;
+}
+
+img#save-notes {
+  scale: 0.75;
+}
+
+#load-notes:hover {
+  scale: 1.2;
+  transform: rotate(180deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+  cursor: pointer;
+}
+
+img#load-notes {
+  scale: 0.75;
+}
+
+.note-control {
+  display:none;
 }
 
 #github:hover {
@@ -138,6 +166,14 @@ p, a {
   /* Add width, height, background color, etc. as needed */
 }
 
+.top-left-component {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Additional styling properties */
+  /* Add width, height, background color, etc. as needed */
+}
+
 .bottom-right-component {
   position: absolute;
   bottom: 0;
@@ -147,7 +183,7 @@ p, a {
 .bottom-left-component {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 10;
 }
 
 .search {
@@ -156,22 +192,23 @@ p, a {
   padding: 5px;
   max-width: 100%;
   border-radius: 10px;
-  justify-content: center;
-  align-items: center;
+  /*justify-content: center;
+  align-items: center;*/
   display: flex;
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 33%;
-  scale:120%;
+  scale:150%;
   left:600px;
 }
 
 input[type="text"] {
   outline: none;
   background-color: rgb(255, 160, 176);
-  color: gray;
+  color: blue;
+  background-image: url("bubbles2.gif");
+  background-size:25%;
 }
 
 .search input[type="text"] {
@@ -197,60 +234,53 @@ input[type="text"] {
   transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
 }
 
-.tv {
-  position: relative;
-  width: 400px; /* Adjust the width as needed */
-  height: auto;
+.sticky-note {
+  width: 100px;
+  height: 100px;
+  background-image: url('post-it.png');
+  background-size: 150%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: move;
 }
 
-.tv .content {
-  position: relative;
-}
-
-.tv img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.tv .gif-container,
-.tv .iframe-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.tv .iframe-container iframe,
-.tv .gif-container img {
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-
-.tv .tv-button {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  scale:10%;
-  pointer-events: auto;
+textarea.sticky-note {
+  border:none;
   background-color: transparent;
-  border: none;
-  padding: 0;
+  resize: none;
+  width: 100%;
+  height: 100%;
+}
+
+.trash-can {
+  width: 100px;
+  height: 100px;
+  background-image: url('trash-can.png');
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  scale:120%;
+  opacity: 75%;
+}
+
+.trash-can:hover {
+  scale: 1.4;
+  opacity: 100%;
+  transition: scale 0.6s ease-in-out, opacity 0.6s ease-in-out;
   cursor: pointer;
 }
 
-.tv-button:active {
-  transform: rotate(360deg);
-  transition: transform 0.6s ease-in-out;
+.sticky-button {
+  width: 100px;
+  height: 100px;
+  background-image: url('sticky-notes-block.png');
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center;
+  scale:70%;
+  position: absolute;
 }
 
-#stream2 {
+.hidden {
   display: none;
-}
-
-#stream1.active {
-  display: block;
 }

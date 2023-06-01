@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
     <title>Home</title>
 </head>
 <body>
@@ -15,9 +17,9 @@
     </div>
 
 
-    <div class="clockdate bottom-right-component">
-        <div id="clock" class="hidden"></div>
-        <div id="date" class="hidden"></div>
+    <div class="clockdate top-left-component">
+        <div id="clock"></div>
+        <div id="date"></div>
     </div>
 
     <div class="bottom-left-component">
@@ -29,6 +31,16 @@
     </div>
 
     <li class="socials top-right-component">
+
+        <!--
+        <div id="save-notes" class="circle note-control">
+            <a onclick="saveStickyNotes()"><img src="floppy.png" alt="notes" width="50" height="50" id="save-notes"></a>
+        </div>
+
+        <div id="load-notes" class="circle note-control">
+            <a onclick="loadStickyNotes()"><img src="sparkle.png" alt="load" width="50" height="50"></a>
+        </div>
+        -->
 
         <div id="github" class="circle">
             <a href="https://github.com/"><img src="github-mark-white.png" alt="github" width="50" height="50"></a>
@@ -48,7 +60,11 @@
 
     </li>
 
-    <img src="tv-knob.png" draggable="false" class="physics draggable">
+    <!--
+    <button class="sticky-button" onclick="createStickyNote()"></button>
+      
+    <div id="trash-can" class="bottom-right-component trash-can"></div>
+    -->
     
 </body>
 <script src="main.js"></script>

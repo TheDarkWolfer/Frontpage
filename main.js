@@ -118,7 +118,7 @@ const searchInput = document.getElementById('searchInput');
 setInterval(() => {
     currentIndex = (currentIndex + 1) % placeholderTexts.length;
     searchInput.placeholder = placeholderTexts[currentIndex];
-  }, 500);
+  }, 250);
   
 
   var holdTimer;
@@ -186,159 +186,144 @@ getNewQuote();
 
 setInterval(getNewQuote,30000);
 
-
-
-// Physics simulation parameters
-const gravity = 0.5; // Gravity force
-const friction = 0.9; // Friction coefficient
-
-// Click and drag parameters
-let isDragging = false;
-let dragElement = null;
-let dragOffsetX = 0;
-let dragOffsetY = 0;
-
-// Get all elements with physics or draggable enabled
-const elements = document.querySelectorAll('.physics, .draggable');
-
-// Create an array to store element data
-const elementData = [];
-
-// Initialize element data
-elements.forEach((element) => {
-  const data = {
-    element,
-    x: 0, // Initial x position
-    y: 0, // Initial y position
-    vx: 0, // Initial x velocity
-    vy: 0, // Initial y velocity
-    tag: element.getAttribute('data-tag'), // Tag for collision handling or draggable
-    isLocked: element.classList.contains('locked'), // Check if element is locked
-    isDraggable: element.classList.contains('draggable'), // Check if element is draggable
-  };
-
-  element.addEventListener('mousedown', handleMouseDown);
-  element.addEventListener('mouseup', handleMouseUp);
-
-  elementData.push(data);
+$(function() {
+  $(".sticky-note").draggable();
 });
 
-// Function to update element positions
-function updatePositions() {
-  elementData.forEach((data) => {
-    if (!data.isLocked) {
-      // Update velocity based on gravity
-      data.vy += gravity;
+function createStickyNote() {
+  const textarea = $("<textarea>", { id: "stickyNote", class: "sticky-note", placeholder: "Write something.." });
 
-      // Update position based on velocity
-      data.x += data.vx;
-      data.y += data.vy;
-
-      // Apply friction
-      data.vx *= friction;
-      data.vy *= friction;
-
-      // Prevent objects from going outside the screen
-      const rect = data.element.getBoundingClientRect();
-      if (data.x < 0) {
-        data.x = 0;
-        data.vx *= -1;
-      } else if (data.x + rect.width > window.innerWidth) {
-        data.x = window.innerWidth - rect.width;
-        data.vx *= -1;
-      }
-      if (data.y < 0) {
-        data.y = 0;
-        data.vy *= -1;
-      } else if (data.y + rect.height > window.innerHeight) {
-        data.y = window.innerHeight - rect.height;
-        data.vy *= -1;
-      }
-    }
-
-    // Update element style
-    data.element.style.transform = `translate(${data.x}px, ${data.y}px)`;
+  // Enable dragging functionality using jQuery UI draggable
+  textarea.draggable({
+    cancel: ".editable", // Exclude the textarea from being draggable
+    containment: "window" // Limit dragging within the window
   });
-}
 
-// Function to handle collisions
-function handleCollisions() {
-  for (let i = 0; i < elementData.length; i++) {
-    const data1 = elementData[i];
-
-    if (!data1.isDraggable) {
-      // Check collision with other elements
-      for (let j = i + 1; j < elementData.length; j++) {
-        const data2 = elementData[j];
-
-        // Check if elements have the same tag for collision handling
-        if (data1.tag === data2.tag) {
-          const rect1 = data1.element.getBoundingClientRect();
-          const rect2 = data2.element.getBoundingClientRect();
-
-          // Detect collision
-          if (
-            rect1.right > rect2.left &&
-            rect1.left < rect2.right &&
-            rect1.bottom > rect2.top &&
-            rect1.top < rect2.bottom
-          ) {
-            // Swap velocities for a simple bounce effect
-            const tempVx = data1.vx;
-            const tempVy = data1.vy;
-            data1.vx = data2.vx;
-            data1.vy = data2.vy;
-            data2.vx = tempVx;
-            data2.vy = tempVy;
-          }
-        }
-      }
+  // Handle mouse events for dragging, editing, and deletion
+  textarea.mousedown(function(event) {
+    if (event.which === 3) {
+      // Right-click to enable dragging
+      $(this).addClass("draggable");
+    } else if (event.which === 1 && !$(this).hasClass("draggable")) {
+      // Left-click to start editing
+      $(this).addClass("editable");
     }
+  }).mouseup(function(event) {
+    if (event.which === 3) {
+      // Right-click to disable dragging
+      $(this).removeClass("draggable");
+    } else if (event.which === 1) {
+      // Left-click to stop editing
+      $(this).removeClass("editable");
+    }
+  }).draggable({
+    containment: "window"
+  });
+
+  // Make the trash can a droppable target
+  $("#trash-can").droppable({
+    accept: ".sticky-note", // Only accept elements with the "sticky-note" class
+    drop: function(event, ui) {
+      // Delete the dropped sticky note
+      ui.draggable.remove();
+    }
+  });
+
+  $("body").append(textarea);
+}
+
+function saveStickyNotes() {
+  const stickyNotes = $(".sticky-note");
+
+  // Create an array to store the note data
+  const notesData = [];
+
+  // Iterate over each sticky note
+  stickyNotes.each(function() {
+    const note = $(this);
+    const noteId = note.attr("id");
+    const noteText = note.find("textarea").val();
+    const notePosition = note.position();
+
+    // Create an object with note data
+    const noteData = {
+      id: noteId,
+      text: noteText,
+      position: {
+        left: notePosition.left,
+        top: notePosition.top
+      }
+    };
+
+    // Add the note data to the array
+    notesData.push(noteData);
+  });
+
+  // Store the notes data in localStorage
+  localStorage.setItem("stickyNotes", JSON.stringify(notesData));
+
+  console.log("Saved the sticky notes bosslady!");
+}
+
+
+
+
+
+function createStickyNote(noteId, noteText, notePosition) {
+  const stickyNote = $("<div>", { id: noteId, class: "sticky-note" });
+  const textarea = $("<textarea>", { class: "sticky-note-text", placeholder: "Write something.." });
+
+  // Set the note text if provided
+  if (noteText) {
+    textarea.val(noteText);
   }
-}
 
-// Function to handle mouse down event
-function handleMouseDown(event) {
-  const target = event.currentTarget;
-  const data = elementData.find((item) => item.element === target);
-
-  if (data && data.isDraggable) {
-    isDragging = true;
-    dragElement = data;
-    dragOffsetX = event.clientX - data.x;
-    dragOffsetY = event.clientY - data.y;
+  // Set the note position if provided
+  if (notePosition) {
+    stickyNote.css({ left: notePosition.left, top: notePosition.top });
   }
+
+  stickyNote.append(textarea);
+  $("body").append(stickyNote);
 }
 
-// Function to handle mouse up event
-function handleMouseUp() {
-  isDragging = false;
-  dragElement = null;
+
+
+function clearStickyNotes() {
+  // Remove all sticky notes from the DOM
+  $(".sticky-note").remove();
+
+  // Clear the saved sticky notes from localStorage
+  localStorage.removeItem("stickyNotes");
+
+  console.log("Cleared the sticky notes!");
 }
 
-// Function to handle mouse move event
-function handleMouseMove(event) {
-  if (isDragging && dragElement) {
-    dragElement.x = event.clientX - dragOffsetX;
-    dragElement.y = event.clientY - dragOffsetY;
-    dragElement.element.style.transform = `translate(${dragElement.x}px, ${dragElement.y}px)`;
+function removeStickyNoteFromStorage(noteId) {
+  const stickyNotesDataJson = localStorage.getItem("stickyNotes");
+  if (stickyNotesDataJson) {
+    const stickyNotesData = JSON.parse(stickyNotesDataJson);
+
+    // Remove the sticky note data from the object using the note ID as the key
+    delete stickyNotesData[noteId];
+
+    // Convert the updated sticky notes data to JSON string
+    const updatedStickyNotesDataJson = JSON.stringify(stickyNotesData);
+
+    // Store the updated sticky notes data in localStorage
+    localStorage.setItem("stickyNotes", updatedStickyNotesDataJson);
   }
+
+  console.log("Removed sticky note from storage:", noteId);
 }
 
-// Add mouse move event listener to the document
-document.addEventListener('mousemove', handleMouseMove);
 
-// Animation loop
-function animate() {
-  updatePositions();
-  handleCollisions();
-  requestAnimationFrame(animate);
-}
+
 
 
 function whatIWantLoaded() {
   getNewQuote();
-  animate();
+  //loadStickyNotes();
 }
 
 window.onload = whatIWantLoaded();

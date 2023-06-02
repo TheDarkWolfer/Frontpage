@@ -24,6 +24,11 @@ function displayClock() {
   // Update the clock every hundredth of a second
   setInterval(displayClock, 100);
   
+
+//As of today, June 1st 2023, I am feeling unbearable emotionnal distress.
+//Life is currently painful, and going on is worse than hell. But I'm still here.
+//May Artemis gaze upon my struggle and grant me the strength to go on, for my pain is unbearable.
+
 // const slideshowContainer = document.querySelector('.slideshow-container');
 
 //   // Function to create the slideshow
@@ -155,6 +160,7 @@ const quoteDiv = document.getElementById('quoteOfTheDay');
 const getNewQuote = async () =>
 {
 
+  try {
     //api for quotes
     var url="https://type.fit/api/quotes";    
 
@@ -181,6 +187,13 @@ const getNewQuote = async () =>
     //function to dynamically display the quote and the author
     text.innerHTML=quote;
     author.innerHTML="~ "+auth;
+  }
+
+  catch {
+    quoteDiv = document.getElementById("quoteOfTheDay");
+    quoteDiv.style.backgroundImage = "url('static.gif')";
+
+  }
 }
 getNewQuote();
 

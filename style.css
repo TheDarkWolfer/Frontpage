@@ -3,6 +3,10 @@ body {
   text-shadow: 1px 1px rgba(123, 15, 103, 0.5), 2px 2px rgba(129, 18, 127, 0.51), 3px 3px rgba(112, 20, 135, 0.52);
   
   overflow: hidden;
+
+  background-image: url("galaxy-pixel-art.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .youtube-container {
@@ -57,12 +61,16 @@ button:hover:not(.tv-button) {
   border-radius: 10px;
   color:pink;
   text-emphasis: bold;
+  background-image: url("twinkle_stars.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .quoteOfTheDay:hover {
   background-color: pink;
   border: 3px solid hotpink;
-  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+  scale:120%;
+  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out, scale 0.3s ease-in-out;
   cursor:pointer;
 }
 
@@ -131,6 +139,12 @@ img#load-notes {
   transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
 }
 
+#chmod:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
 .socials {
   display: flex;
   flex-direction: column;
@@ -169,7 +183,7 @@ img#load-notes {
 .top-left-component {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 30px;
   /* Additional styling properties */
   /* Add width, height, background color, etc. as needed */
 }
@@ -182,8 +196,8 @@ img#load-notes {
 
 .bottom-left-component {
   position: absolute;
-  bottom: 0;
-  left: 10;
+  bottom: 30px;
+  left: 30px;
 }
 
 .search {
@@ -226,12 +240,16 @@ input[type="text"] {
   left:max-content;
   border-radius: 10px;
   color:white;
+  background-image:url("night_sky.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .clockdate:hover {
   background-color: pink;
   border: 3px solid hotpink;
-  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+  scale:120%;
+  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out, scale 0.3s ease-in-out;
 }
 
 .sticky-note {
@@ -283,4 +301,22 @@ textarea.sticky-note {
 
 .hidden {
   display: none;
+}
+
+.shifting-rainbow-button {
+  display: inline-block;
+  font-weight: bold;
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shifting-rainbow-animation 5s linear infinite;
+}
+
+@keyframes shifting-rainbow-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

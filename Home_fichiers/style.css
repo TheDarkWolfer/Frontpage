@@ -1,0 +1,235 @@
+body {
+  font-family: sans-serif;
+  text-shadow: 1px 1px rgba(123, 15, 103, 0.5), 2px 2px rgba(129, 18, 127, 0.51), 3px 3px rgba(112, 20, 135, 0.52);
+  
+  /* overflow: hidden; */
+}
+
+.youtube-container {
+  overflow: hidden;
+  width: 30%;
+  /* Keep it the right aspect-ratio */
+  aspect-ratio: 16/9;
+  /* No clicking/hover effects */
+  pointer-events: none;
+  border-radius: 25px; width: 300px; overflow: hidden;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.youtube-container iframe {
+  /* Extend it beyond the viewport... */
+  width: 90%;
+  height: 30%;
+  /* ...and bring it back again */
+  margin-left: -30%;
+}/*# sourceMappingURL=lofi_css.css.map */
+
+.youtube-container:hover {
+  width: 90%;
+  height: 30%;
+  
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+button {
+  opacity: 0.5;
+  transition: opacity 0.3s, transform 0.3s, background-color 0.3s ease;
+  border-radius: 25px; overflow: hidden;
+  background-color: lightblue;
+}
+
+button:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  background-color:hotpink;
+}
+
+.tooltip_div {
+  margin-top: 100px;
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip_div .tooltip {
+  visibility: hidden;
+  width: 170px;
+  background-color: rgb(255, 156, 222);
+  color: #fff;
+  text-align: center;
+  border-radius: 0;
+  padding: 5px 0;
+  
+  /* Positioning the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);  
+  clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%);
+  visibility: hidden;
+  border-radius: 25px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.tooltip_div:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.quoteOfTheDay {
+  background-color: lightgray;
+  display: inline-block;
+  border: 1px solid gray;
+  padding: 5px;
+  max-width: 50%;
+  width: auto;
+  border-radius: 10px;
+}
+
+.quoteOfTheDay:hover {
+  background-color: pink;
+  border: 3px solid hotpink;
+  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+p, a {
+  color: white;
+}
+
+#wandering-element {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: pink;
+  border-radius: 75%;
+  transition: transform 0.3s ease-in-out;
+}
+
+canvas {
+  background-color: black;
+}
+
+.clockdate {
+  background-color: lightgray;
+  display: inline-block;
+  border: 1px solid gray;
+  padding: 5px;
+  max-width: 50%;
+  width: auto;
+  border-radius: 10px;
+}
+
+.clockdate:hover {
+  background-color: pink;
+  border: 3px solid hotpink;
+  transition : background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.boid {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-image: radial-gradient(lightblue,blue);
+  border-radius: 50%;
+}
+
+.container {
+  position: relative;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#flag {
+  scale:50%;
+}
+
+#github:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+#reddit:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+#chatgpt:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+#proton:hover {
+  scale: 1.2;
+  transform: rotate(360deg);
+  transition: scale 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  background-color:white;
+  padding: 5px;
+  border-radius: 10px;
+  max-width: fit-content;
+  border-color: pink;
+  border-style: solid;
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: pink;
+  color: hotpink; 
+  text-align: center;
+  line-height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-right-component {
+  position: fixed;
+  top: 0;
+  right: 0;
+  /* Additional styling properties */
+  /* Add width, height, background color, etc. as needed */
+}
+
+.search {
+  background-color: pink;
+  color: hotpink;
+  padding: 5px;
+  max-width: 100%;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+  width: 200%;
+}
+
+
+input[type="text"] {
+  outline: none;
+  background-color: rgb(255, 160, 176);
+  color: gray;
+}
+
+.search input[type="text"] {
+  width:200%;
+}
